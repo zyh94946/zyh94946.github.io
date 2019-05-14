@@ -44,3 +44,8 @@
   background-color: #f0ad4e;
   color: #fff;
 }
+@media (max-width: 60em) {
+  .sidebar-item .blog-sidebar-tags ul li {
+    margin: 0.1em 0.1em;
+  }
+}
