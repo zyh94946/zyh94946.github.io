@@ -1,5 +1,5 @@
 .main {
-  font: 16px Roboto, "Noto Sans", "Noto Sans CJK", Helvetica, Arial, sans-serif, Georgia, serif;
+  font: 14px Roboto, "Noto Sans", "Noto Sans CJK", Helvetica, Arial, sans-serif, Georgia, serif;
   margin-top: 0em;
 }
 .main .main-container {
@@ -46,6 +46,9 @@
   -ms-flex-wrap: nowrap;
   flex-wrap: nowrap;
   padding: 0;
+}
+.main .main-container .post-main {
+  line-height: 1.75;
 }
 .main .main-container .content {
   -webkit-box-flex: 1;

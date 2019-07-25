@@ -1,7 +1,7 @@
 .header {
   padding-bottom: 0em;
   margin-bottom: 0;
-  background: url("/images/bg2.jpg") no-repeat 90%;
+  background: url("/images/bg2.jpg") no-repeat 90% -1px;
   color: #eee;
 }
 .header .header-container {
@@ -63,7 +63,7 @@
   top: 0;
 }
 .header .header-container .header-title .title {
-  font: bold 2em Roboto, "Noto Sans", "Noto Sans CJK", Helvetica, Arial, sans-serif, Georgia, serif;
+  font: bold 2.2em Roboto, "Noto Sans", "Noto Sans CJK", Helvetica, Arial, sans-serif, Georgia, serif;
   margin: 0 0 0.5em 0;
 }
 .header .header-container .header-title .subtitle {
