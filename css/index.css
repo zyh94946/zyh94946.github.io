@@ -1,7 +1,7 @@
 .header {
   padding-bottom: 0em;
   margin-bottom: 0;
-  background: url("/images/bg2.jpg") no-repeat 90%;
+  background: url("/images/bg2.jpg") no-repeat 90% -1px;
   color: #eee;
 }
 .header .header-container {
@@ -63,7 +63,7 @@
   top: 0;
 }
 .header .header-container .header-title .title {
-  font: bold 2em Roboto, "Noto Sans", "Noto Sans CJK", Helvetica, Arial, sans-serif, Georgia, serif;
+  font: bold 2.2em Roboto, "Noto Sans", "Noto Sans CJK", Helvetica, Arial, sans-serif, Georgia, serif;
   margin: 0 0 0.5em 0;
 }
 .header .header-container .header-title .subtitle {
@@ -136,7 +136,7 @@
 .nav ul li a {
   position: relative;
   display: block;
-  font-size: 1em;
+  font-size: 16px;
   padding: 0.75em;
   color: #ddd;
   text-decoration: none;
@@ -196,7 +196,7 @@
   }
 }
 .main {
-  font: 16px Roboto, "Noto Sans", "Noto Sans CJK", Helvetica, Arial, sans-serif, Georgia, serif;
+  font: 14px Roboto, "Noto Sans", "Noto Sans CJK", Helvetica, Arial, sans-serif, Georgia, serif;
   margin-top: 0em;
 }
 .main .main-container {
@@ -243,6 +243,9 @@
   -ms-flex-wrap: nowrap;
   flex-wrap: nowrap;
   padding: 0;
+}
+.main .main-container .post-main {
+  line-height: 1.75;
 }
 .main .main-container .content {
   -webkit-box-flex: 1;
@@ -437,7 +440,7 @@ body,
 body {
   color: #26272b;
   background: #ccc;
-  font: 16px Roboto, "Noto Sans", "Noto Sans CJK", Helvetica, Arial, sans-serif, Georgia, serif;
+  font: 14px Roboto, "Noto Sans", "Noto Sans CJK", Helvetica, Arial, sans-serif, Georgia, serif;
   word-wrap: break-word;
   display: -webkit-box;
   display: -moz-box;
@@ -474,7 +477,7 @@ footer {
 }
 .container {
   padding: 0;
-  max-width: 90em;
+  max-width: 103em;
   width: 100%;
   margin: 0 auto;
 }
@@ -621,7 +624,7 @@ code {
   word-wrap: break-word;
   border-radius: 0.3em;
   font-family: Monaco, Menlo, "Roboto Mono", Consolas, monospace, Roboto, "Noto Sans", "Noto Sans CJK", Helvetica, Arial, sans-serif, Georgia, serif;
-  font-size: 16px;
+  font-size: 14px;
   background: #f8f8f8;
   -webkit-font-feature-settings: "liga" 0; /* No variation */
   -moz-font-feature-settings: "liga=0"; /* Firefox 4.0 to 14.0 */
@@ -670,7 +673,7 @@ figure table tbody tr td.gutter {
 }
 figure table tbody tr td pre {
   font-family: Monaco, Menlo, "Roboto Mono", Consolas, monospace, Roboto, "Noto Sans", "Noto Sans CJK", Helvetica, Arial, sans-serif, Georgia, serif;
-  font-size: 16px;
+  font-size: 14px;
   line-height: 1.5em;
   padding: 0;
   margin: 0;
