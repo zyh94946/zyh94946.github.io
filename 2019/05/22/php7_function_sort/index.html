@@ -170,7 +170,7 @@
   
   <article class="article post card" itemscope itemtype="https://schema.org/Article">
     <div class="post-block">
-      <link itemprop="mainEntityOfPage" href="https://blog.ibelieving.io/2019/05/22/php7_function_sort/">
+      <link itemprop="mainEntityOfPage" href="https://ibelieving.io/2019/05/22/php7_function_sort/">
       <span hidden itemprop="author" itemscope itemtype="https://schema.org/Person">
        <meta itemprop="name" content="Zhongyang Hao">
        <meta itemprop="description" content="关注互联网架构设计、高可用、微服务化、PHP、Go。">
@@ -186,16 +186,6 @@
         
         <span class="post-date">
           <i class="far fa-calendar-plus"></i><span><time title="post-date" itemprop="dateCreated datePublished" datetime="2019-05-22T19:14:33+08:00">2019-05-22 19:14:33</time></span>
-        </span>
-        
-        
-        
-        
-        
-        <span class="post-meta-divider divider">|</span>
-        
-        <span class="post-comment-count">
-          <i class="far fa-comments"></i><span><a href="/2019/05/22/php7_function_sort/#disqus_thread" itemprop="discussionUrl"><span class="post-comment-count disqus-comment-count" data-disqus-identifier="2019/05/22/php7_function_sort/" itemprop="commentCount"></span></a></span>
         </span>
         
         
@@ -293,26 +283,24 @@
   
   
 
-<div class="comments" id="comments">
-  
-  <script defer id="dsq-count-scr" src="//ibelieving.disqus.com/count.js"></script>
-  
-  <div id="disqus_thread" class="disqus_thread"></div>
-  <script type="text/javascript">
-  var disqus_config = function () {
-    this.page.url = "https://blog.ibelieving.io/2019/05/22/php7_function_sort/";
-    this.page.identifier = "2019/05/22/php7_function_sort/";
-  };
-  (function() {
-    var d = document, s = d.createElement("script");
-    s.src = "https://ibelieving.disqus.com/embed.js";
-    s.setAttribute("data-timestamp", +new Date());
-    (d.head || d.body).appendChild(s);
-  })();
-  </script>
-  
-  
-</div>
+
+<link rel="stylesheet" href="//api.ibelieving.io/src/iDisqus.min.css?v=20190831">
+<script src="//api.ibelieving.io/src/iDisqus.min.js?v=20190831"></script>  
+<div id="comment"></div>
+<script>
+    var disq = new iDisqus('comment', {
+        forum: 'ibelieving',
+        site: 'https://ibelieving.io',
+        api: 'https://api.ibelieving.io/api',
+        url: '2019/05/22/php7_function_sort/',
+        mode: 2,
+        timeout: 3000,
+        init: true,
+        emojiPreview: true
+    });
+    disq.count();
+</script>
+
 
 
 
@@ -352,11 +340,11 @@
           
             <li><a href="/tags/Swoole/" class="tag-could" data-toggle="tooltip" data-placement="top" title="Swoole">Swoole</a></li>
           
-            <li><a href="/tags/源码/" class="tag-could" data-toggle="tooltip" data-placement="top" title="源码">源码</a></li>
-          
             <li><a href="/tags/IDE/" class="tag-could" data-toggle="tooltip" data-placement="top" title="IDE">IDE</a></li>
           
             <li><a href="/tags/RabbitMQ/" class="tag-could" data-toggle="tooltip" data-placement="top" title="RabbitMQ">RabbitMQ</a></li>
+          
+            <li><a href="/tags/源码/" class="tag-could" data-toggle="tooltip" data-placement="top" title="源码">源码</a></li>
           
             <li><a href="/tags/Go/" class="tag-could" data-toggle="tooltip" data-placement="top" title="Go">Go</a></li>
           
