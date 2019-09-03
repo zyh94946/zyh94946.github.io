@@ -36,13 +36,13 @@
     </summary>
     
     
-      <category term="PHP" scheme="https://ibelieving.io/tags/PHP/"/>
-    
-      <category term="Swoole" scheme="https://ibelieving.io/tags/Swoole/"/>
-    
       <category term="Docker" scheme="https://ibelieving.io/tags/Docker/"/>
     
       <category term="微服务" scheme="https://ibelieving.io/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/"/>
+    
+      <category term="PHP" scheme="https://ibelieving.io/tags/PHP/"/>
+    
+      <category term="Swoole" scheme="https://ibelieving.io/tags/Swoole/"/>
     
   </entry>
   
