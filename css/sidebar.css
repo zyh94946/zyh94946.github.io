@@ -15,13 +15,6 @@
   -ms-transition: 1s ease-in-out;
   transition: 1s ease-in-out;
 }
-.info .author-avatar:hover {
-  -webkit-transform: rotateY(720deg);
-  -moz-transform: rotateY(720deg);
-  -o-transform: rotateY(720deg);
-  -ms-transform: rotateY(720deg);
-  transform: rotateY(720deg);
-}
 .info .author-name {
   color: #26272b;
   font-size: 1.8em;
