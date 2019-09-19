@@ -2,7 +2,4 @@ User-agent: *
 Allow: /
 Allow: /archives/
 Allow: /tags/ 
-Disallow: /js/
-Disallow: /css/
-Disallow: /fonts/
 Sitemap: http://blog.ibelieving.io/sitemap.xml
