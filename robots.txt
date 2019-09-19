@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 Allow: /archives/
 Allow: /tags/ 
-Sitemap: http://blog.ibelieving.io/sitemap.xml
+Sitemap: https://ibelieving.io/sitemap.xml
