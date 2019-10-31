@@ -1,39 +1,445 @@
-{% extends "_layout.njk" %}
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#000000">
+    <meta name="msapplication-TileColor" content="#000000">
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-146915508-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      var gtag = function () {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "UA-146915508-1");
+    </script>
+    
+    
+    <title>标签: PHP | ibelieving.io - 技术分享 - 行者无疆</title>
+    
+    <meta name="keywords" content="微服务, 架构设计, 高可用, PHP, Go, Linux">
+    
+    
+    
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+    
+    
+    <link rel="icon" type="image/png" sizes="192x192" href="/favicons/android-chrome-192x192.png">
+    
+    
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+    
+    
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+    
+    
+    <link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#000000">
+    
+    
+    <link rel="manifest" href="/favicons/site.webmanifest">
+    
+    
+    <meta name="msapplication-config" content="/favicons/browserconfig.xml">
+    
+    
+    <link rel="alternate" href="/atom.xml" title="ibelieving.io - 技术分享" type="application/atom+xml">
+    
+    
+    <link rel="shortcut icon" type="image/x-icon" href="/favicons/favicon.ico">
+    
+    
+    <link rel="stylesheet" type="text/css" href="/css/normalize.css">
+    <link rel="stylesheet" type="text/css" href="/css/index.css">
+    
+    <link rel="stylesheet" type="text/css" href="/css/sidebar.css">
+    
+    
+<link rel="stylesheet" type="text/css" href="/css/page.css">
+<link rel="stylesheet" type="text/css" href="/css/post.css">
 
-{% block css %}
-<link rel="stylesheet" type="text/css" href="{{ url_for("css/page.css") }}">
-<link rel="stylesheet" type="text/css" href="{{ url_for("css/post.css") }}">
-{% endblock %}
+    <link rel="stylesheet" type="text/css" href="/css/custom.css">
+    <link rel="stylesheet" type="text/css" href="/css/atom-one-dark.css">
+    <link rel="stylesheet" type="text/css" href="/css/lightgallery.min.css">
+    <script type="text/javascript" src="/js/jquery.min.js"></script>
+    <script defer type="text/javascript" src="/js/util.js"></script>
+    <script defer type="text/javascript" src="/js/clipboard.min.js"></script>
+    <script defer type="text/javascript" src="/js/scrollspy.js"></script>
+    <script defer type="text/javascript" src="/js/fontawesome-all.min.js"></script>
+    <script defer type="text/javascript" src="/js/lightgallery.min.js"></script>
+    <script defer type="text/javascript" src="/js/lg-fullscreen.min.js"></script>
+    <script defer type="text/javascript" src="/js/lg-hash.min.js"></script>
+    <script defer type="text/javascript" src="/js/lg-pager.min.js"></script>
+    <script defer type="text/javascript" src="/js/lg-thumbnail.min.js"></script>
+    <script defer type="text/javascript" src="/js/lg-zoom.min.js"></script>
+    
+    <script defer src="/js/busuanzi.pure.mini.js"></script>
+    
+    
+    <script defer type="text/javascript" src="/js/search.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function () {
+      var searchPath = "search.xml";
+      if (searchPath.length === 0) {
+        searchPath = "search.xml";
+      }
+      var path = "/" + searchPath;
+      searchFunc(path, "search-input", "search-result");
+    });
+    </script>
+    
+    
+    <script defer type="text/javascript" src="/js/index.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function () {
+      var cb = null;
+      var els = $(".post figure.highlight");
+      if (els.length) {
+        // Enabled Hexo highlight line number.
+        $(els).each(function (i, e) {
+          $(e).before("<button class=\"copy button\">复制</button>");
+        });
+        cb = new ClipboardJS("button.copy", {
+          "target": function (trigger) {
+              // Get target element by DOM API.
+              // nextElementSibling is figure,highlight.
+              // And following is the sequence of Hexo's internal
+              // highlight layout with line number.
+              return trigger.nextElementSibling.firstChild.firstChild.firstChild.lastChild.firstChild.firstChild;
+          }
+        });
+      } else {
+        // Disabled Hexo highlight line number.
+        els = $(".post pre code");
+        $(els).each(function (i, e) {
+          // Add button before pre, not code.
+          $(e).parent().before("<button class=\"copy button\">复制</button>");
+        });
+        cb = new ClipboardJS("button.copy", {
+          "target": function (trigger) {
+              // Get target element by DOM API.
+              // nextElementSibling is figure,highlight.
+              // And following is the sequence of Hexo's internal
+              // highlight layout without line number.
+              return trigger.nextElementSibling.firstChild;
+          }
+        });
+      }
+      cb.on("success", function (e) {
+        e.clearSelection();
+        var trigger = e.trigger;
+        // Change button text as a user tip.
+        trigger.innerHTML = "已复制";
+        $(trigger).addClass("copied");
+        // Change button text back;
+        setTimeout(function () {
+          trigger.innerHTML = "复制";
+          $(trigger).removeClass("copied");
+        }, 1500);
+      });
+    });
+    </script>
+    
+    <script defer type="text/javascript" src="/js/custom.js"></script>
+  </head>
+  <body itemscope itemtype="https://schema.org/WebPage" lang="zh-CN" data-spy="scroll" data-target=".list-group">
+    
+<header id="header" class="header" style="background-color: #000000;">
+  <div class="container">
+    <div class="header-container">
+      <div class="header-title">
+        <h1 class="title"><a href="/">ibelieving.io - 技术分享</a></h1>
+        <h2 class="subtitle">行者无疆</h2>
+      </div>
+      
+    </div>
+    <nav id="nav" class="nav">
+      <a id="nav-toggle" class="nav-toggle" aria-hidden="true"><i class="fas fa-bars" aria-label="切换导航栏"></i></a>
+      <ul id="menu" role="menubar" aria-hidden="false">
+        
+        <li role="menuitem"><a href="/"><i class="fas fa-home"></i><span class="menu-text">首页</span></a></li>
+        
+        <li role="menuitem"><a href="/archives/"><i class="fas fa-archive"></i><span class="menu-text">归档</span></a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</header>
 
-{% block title %}{{ __("tag") }}: {{ page.tag }} | {{ config.title }}{% if config.subtitle %} - {{ config.subtitle }}{% endif %}{% endblock %}
 
-{% block content %}
+    <main id="main" class="main">
+      <div class="container">
+        <div class="main-container">
+          <div class="content">
+            
 <div id="tag" class="tag page">
-  <h1 class="page-title">{{ page.tag }}</h1>
-  {% for post in page.posts.toArray() %}
-  <article class="article post card{% if theme.animate %} animate{% endif %}" itemscope itemtype="http://schema.org/Article">
+  <h1 class="page-title">PHP</h1>
+  
+  <article class="article post card" itemscope itemtype="https://schema.org/Article">
     <header id="post-header" class="post-header">
       <h1 class="post-title-simple" itemprop="name headline">
-        <a class="post-title-link post-title-link-external" href="{{ url_for(post.path) }}" itemprop="url">{{ post.title }}</a>
+        <a class="post-title-link post-title-link-external" href="/2019/08/28/docker_traefik_micro_service/" itemprop="url">容器服务化方向的一些探索</a>
       </h1>
-      {% if post.date %}
+      
       <span class="post-date">
-        <time title="post-date" itemprop="dateCreated datePublished" datetime="{{ moment(post.date).format() }}">{{ date(post.date, "MM-DD") }}</time>
+        <time title="post-date" itemprop="dateCreated datePublished" datetime="2019-08-28T17:31:40+08:00">08-28</time>
       </span>
-      {% endif %}
+      
     </header>
   </article>
-  {% endfor %}
-  {% if page.prev or page.next %}
-  <nav class="pagination">
-    {{
-      paginator({
-        prev_text: "<i class=\"fas fa-angle-left\" aria-label=\"" + __("accessibility.prev_page") + "\"></i>",
-        next_text: "<i class=\"fas fa-angle-right\" aria-label=\"" + __("accessibility.next_page") + "\"></i>",
-        mid_size: 1
-      })
-    }}
-  </nav>
-  {% endif %}
+  
+  <article class="article post card" itemscope itemtype="https://schema.org/Article">
+    <header id="post-header" class="post-header">
+      <h1 class="post-title-simple" itemprop="name headline">
+        <a class="post-title-link post-title-link-external" href="/2019/05/22/php7_function_sort/" itemprop="url">PHP7 数组排序函数源码解析</a>
+      </h1>
+      
+      <span class="post-date">
+        <time title="post-date" itemprop="dateCreated datePublished" datetime="2019-05-22T19:14:33+08:00">05-22</time>
+      </span>
+      
+    </header>
+  </article>
+  
+  <article class="article post card" itemscope itemtype="https://schema.org/Article">
+    <header id="post-header" class="post-header">
+      <h1 class="post-title-simple" itemprop="name headline">
+        <a class="post-title-link post-title-link-external" href="/2019/04/30/swoole_to_go_serv/" itemprop="url">编写Go的TCP服务来替代PHP的Swoole</a>
+      </h1>
+      
+      <span class="post-date">
+        <time title="post-date" itemprop="dateCreated datePublished" datetime="2019-04-30T21:22:46+08:00">04-30</time>
+      </span>
+      
+    </header>
+  </article>
+  
+  <article class="article post card" itemscope itemtype="https://schema.org/Article">
+    <header id="post-header" class="post-header">
+      <h1 class="post-title-simple" itemprop="name headline">
+        <a class="post-title-link post-title-link-external" href="/2019/01/08/php5_error_handle/" itemprop="url">PHP5下的Error错误处理及问题定位</a>
+      </h1>
+      
+      <span class="post-date">
+        <time title="post-date" itemprop="dateCreated datePublished" datetime="2019-01-08T14:30:18+08:00">01-08</time>
+      </span>
+      
+    </header>
+  </article>
+  
+  
 </div>
-{% endblock %}
+
+          </div>
+          
+          
+          
+<aside class="sidebar" id="sidebar">
+  
+  <div class="search">
+    <div class="form-group">
+      <i class="fas fa-search"></i><input type="search" id="search-input" name="q" results="0" placeholder="搜索" class="form-control">
+    </div>
+  </div>
+  <div class="search-result-box" id="search-result"></div>
+  
+  
+<div class="info sidebar-item" id="info">
+  
+  <img class="author-avatar" src="/images/avatar.gif" alt="Zhongyang Hao">
+  
+  <h1 class="author-name">Zhongyang Hao</h1>
+  <h2 class="author-description">关注互联网架构设计、高可用、微服务化、PHP、Go。</h2>
+  <div class="blog-sidebar-tags">
+      <h4 class="blog-sidebar-h4"><i class="fa fa-tag"></i>&nbsp;标签云</h4>
+      <ul class="blog-sidebar-tags-ul blog-sidebar-padding">
+        
+          
+            <li><a href="/tags/Docker/" class="tag-could" data-toggle="tooltip" data-placement="top" title="Docker">Docker</a></li>
+          
+            <li><a href="/tags/微服务/" class="tag-could" data-toggle="tooltip" data-placement="top" title="微服务">微服务</a></li>
+          
+            <li><a href="/tags/PHP/" class="tag-could" data-toggle="tooltip" data-placement="top" title="PHP">PHP</a></li>
+          
+            <li><a href="/tags/Swoole/" class="tag-could" data-toggle="tooltip" data-placement="top" title="Swoole">Swoole</a></li>
+          
+            <li><a href="/tags/Go/" class="tag-could" data-toggle="tooltip" data-placement="top" title="Go">Go</a></li>
+          
+            <li><a href="/tags/爬虫/" class="tag-could" data-toggle="tooltip" data-placement="top" title="爬虫">爬虫</a></li>
+          
+            <li><a href="/tags/Kindle/" class="tag-could" data-toggle="tooltip" data-placement="top" title="Kindle">Kindle</a></li>
+          
+            <li><a href="/tags/mobi/" class="tag-could" data-toggle="tooltip" data-placement="top" title="mobi">mobi</a></li>
+          
+            <li><a href="/tags/IDE/" class="tag-could" data-toggle="tooltip" data-placement="top" title="IDE">IDE</a></li>
+          
+            <li><a href="/tags/源码/" class="tag-could" data-toggle="tooltip" data-placement="top" title="源码">源码</a></li>
+          
+            <li><a href="/tags/RabbitMQ/" class="tag-could" data-toggle="tooltip" data-placement="top" title="RabbitMQ">RabbitMQ</a></li>
+          
+            <li><a href="/tags/TCP/" class="tag-could" data-toggle="tooltip" data-placement="top" title="TCP">TCP</a></li>
+          
+        
+      </ul>
+  </div>
+  <script>
+    // 博客侧栏标签云随机色
+    var tag_cloud = $('.tag-could');
+    tag_cloud.each(function () {
+        var Cnum = 6;
+        var Crand = parseInt(Math.random()*Cnum);
+        $(this).addClass("tag-could" + Crand);
+    })
+  </script>
+</div>
+
+
+  <div class="sidebar-sticky">
+    
+    
+    
+  </div>
+</aside>
+<canvas class="bg-cas" id="bg-cas"></canvas>
+<script>
+  var canvas = document.getElementById("bg-cas");
+  var ctx = canvas.getContext("2d");
+  resize();
+  window.onresize = resize;
+  function resize() {
+    canvas.width = document.getElementById("sidebar").offsetWidth;
+    canvas.height = document.getElementById("sidebar").offsetHeight;
+    canvas.style.top = document.getElementById("sidebar").offsetTop + "px";
+  }
+  var RAF = (function() {
+    return window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || window.oRequestAnimationFrame || window.msRequestAnimationFrame || function(callback) {
+          window.setTimeout(callback, 1000 / 60);
+        };
+  })();
+  // 鼠标活动时，获取鼠标坐标
+  var warea = {x: null, y: null, max: 20000};
+/*  window.onmousemove = function(e) {
+    e = e || window.event;
+    warea.x = e.clientX;
+    warea.y = e.clientY;
+  };
+  window.onmouseout = function(e) {
+    warea.x = null;
+    warea.y = null;
+  };
+*/
+  // 添加粒子
+  // x，y为粒子坐标，xa, ya为粒子xy轴加速度，max为连线的最大距离
+  var dots = [];
+  for (var i = 0; i < 150; i++) {
+    var x = Math.random() * canvas.width;
+    var y = Math.random() * canvas.height;
+    var xa = Math.random() * 2 - 1;
+    var ya = Math.random() * 2 - 1;
+    dots.push({
+      x: x,
+      y: y,
+      xa: xa,
+      ya: ya,
+      max: 6000
+    })
+  }
+  // 延迟100秒开始执行动画，如果立即执行有时位置计算会出错
+  setTimeout(function() {
+    animate();
+  }, 500);
+  // 每一帧循环的逻辑
+  function animate() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    // 将鼠标坐标添加进去，产生一个用于比对距离的点数组
+    var ndots = [warea].concat(dots);
+    dots.forEach(function(dot) {
+      // 粒子位移
+      dot.x += dot.xa;
+      dot.y += dot.ya;
+      // 遇到边界将加速度反向
+      dot.xa *= (dot.x > canvas.width || dot.x < 0) ? -1 : 1;
+      dot.ya *= (dot.y > canvas.height || dot.y < 0) ? -1 : 1;
+      // 绘制点
+      ctx.fillRect(dot.x - 0.5, dot.y - 0.5, 1, 1);
+      // 循环比对粒子间的距离
+      for (var i = 0; i < ndots.length; i++) {
+        var d2 = ndots[i];
+        if (dot === d2 || d2.x === null || d2.y === null) continue;
+        var xc = dot.x - d2.x;
+        var yc = dot.y - d2.y;
+        // 两个粒子之间的距离
+        var dis = xc * xc + yc * yc;
+        // 距离比
+        var ratio;
+        // 如果两个粒子之间的距离小于粒子对象的max值，则在两个粒子间画线
+        if (dis < d2.max) {
+          // 如果是鼠标，则让粒子向鼠标的位置移动
+//          if (d2 === warea && dis > (d2.max / 2)) {
+//            dot.x -= xc * 0.03;
+//            dot.y -= yc * 0.03;
+//          }
+          // 计算距离比
+          ratio = (d2.max - dis) / d2.max;
+          // 画线
+          ctx.beginPath();
+          ctx.lineWidth = ratio / 2;
+          ctx.strokeStyle = 'rgba(0,0,0,' + (ratio + 0.2) + ')';
+          ctx.moveTo(dot.x, dot.y);
+          ctx.lineTo(d2.x, d2.y);
+          ctx.stroke();
+        }
+      }
+      // 将已经计算过的粒子从数组中删除
+     ndots.splice(ndots.indexOf(dot), 1);
+
+    });
+    RAF(animate);
+  }
+</script>
+
+
+
+          
+        </div>
+      </div>
+    </main>
+    
+<footer id="footer" class="footer" style="background: #000000;">
+  <div class="container">
+    <div class="back-to-top">
+      <button id="back-to-top"><i class="fas fa-angle-double-up" aria-label="回到顶部"></i></button>
+    </div>
+    <div class="footer-container">
+      <div class="footer-left">
+        <div class="copyright">
+          <span class="author">Zhongyang Hao</span><span class="year"><i class="far fa-copyright"></i>2017 - 2019</span><span class="creative-commons"><i class="fab fa-creative-commons"></i><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">BY-NC-SA 4.0</a></span>
+        </div>
+        
+        <div class="busuanzi">
+          <span id="busuanzi_container_site_pv"><i class="fas fa-eye" aria-label="站点点击量" aria-hidden="false"></i><span id="busuanzi_value_site_pv"></span></span><span id="busuanzi_container_site_uv"><i class="fas fa-user" aria-label="站点用户数" aria-hidden="false"></i><span id="busuanzi_value_site_uv"></span></span><span id="busuanzi_container_page_pv"><i class="far fa-file-alt"></i><span id="busuanzi_value_page_pv" aria-label="页面点击量" aria-hidden="false"></span></span>
+        </div>
+        
+      </div>
+      <div class="footer-right">
+        <div class="custom-info">
+          
+          托管于<i class="fab fa-github-alt"></i><a href="https://pages.github.com/" target="_blank">GitHub Pages</a>
+          
+        </div>
+        <div class="powered-by">
+          由 <a href="https://hexo.io/" target="_blank">Hexo</a> 强力驱动 | 主题 <a href="https://github.com/AlynxZhou/hexo-theme-aria/" target="_blank">ARIA</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+  </body>
+</html>
