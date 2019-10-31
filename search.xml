@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>Golang 生成 O&#39;Reilly 在线学习平台的电子书</title>
+      <link href="/2019/10/31/golang_generate_oreilly_kindle_book/"/>
+      <url>/2019/10/31/golang_generate_oreilly_kindle_book/</url>
+      
+        <content type="html"><![CDATA[<p>O’Reilly 是有名的动物书出版公司，当然他们也不仅仅出电子书还有很多别的业务。<a href="https://learning.oreilly.com/home/" target="_blank" rel="noopener">O’Reilly 在线学习平台</a>上有他们所有出版过的图书都是原版的，但是仅提供在线阅读，虽然也有 App，但是想在 kindle 上看提高阅读体验。</p><p>于是抽时间练习练习 Golang 写了个程序，生成 mobi 格式的电子书。Github 地址 <a href="https://github.com/zyh94946/oreilly_kindle_book" target="_blank" rel="noopener">oreilly_kindle_book</a> 。</p><h2 id="使用说明"><a href="#使用说明" class="headerlink" title="使用说明"></a>使用说明</h2><ul><li>目前仅支持 macOS、linux, windows 改改应该也可以，但是我手头没有 windows 测不了，或者编个 Docker image 也 ok。</li><li>需要 O’Reilly 在线学习平台的账号，这是必须的。</li><li>安装 <a href="https://www.amazon.com/gp/feature.html?ie=UTF8&amp;docId=1000765211" target="_blank" rel="noopener">kindlegen</a>，mobi 的生成就靠它。</li></ul><h2 id="oreilly-kindle-book-编译"><a href="#oreilly-kindle-book-编译" class="headerlink" title="oreilly_kindle_book 编译"></a>oreilly_kindle_book 编译</h2><p>基于 golang 1.13 开发，目前没有上传二进制包，自行编译吧。</p><p>推荐 clone 之后直接 <code>make &amp;&amp; make install</code>。</p><figure class="hljs highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ git <span class="hljs-built_in">clone</span> https://github.com/zyh94946/oreilly_kindle_book.git<br>$ <span class="hljs-built_in">cd</span> oreilly_kindle_book<br>$ make &amp;&amp; make install<br>Building oreilly_kindle_book...<br>Building success...<br>Installing oreilly_kindle_book...<br>Install success to /usr/<span class="hljs-built_in">local</span>/bin/oreilly_kindle_book.<br>Usage of oreilly_kindle_book:<br>  -email string<br>    you login email of https://www.oreilly.com/member/<br>  -<span class="hljs-built_in">help</span><br>    <span class="hljs-built_in">help</span><br>  -n string<br>    the num of https://learning.oreilly.com/library/view/BOOK-NAME/***<br>  -p string<br>    you login password of https://www.oreilly.com/member/<br>  -version<br>    <span class="hljs-built_in">print</span> version and <span class="hljs-built_in">exit</span><br></code></pre></td></tr></table></figure><p>当然 <code>go get</code> 也可以</p><figure class="hljs highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs undefined">$ <span class="hljs-keyword">go</span> <span class="hljs-built_in">get</span> github.<span class="hljs-keyword">com</span>/zyh94946/oreilly_kindle_book<br>$ <span class="hljs-keyword">go</span> install github.<span class="hljs-keyword">com</span>/zyh94946/oreilly_kindle_book<br></code></pre></td></tr></table></figure><h2 id="oreilly-kindle-book-使用"><a href="#oreilly-kindle-book-使用" class="headerlink" title="oreilly_kindle_book 使用"></a>oreilly_kindle_book 使用</h2><p>非常简单</p><figure class="hljs highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs undefined">$ <span class="hljs-keyword">oreilly_kindle_book </span>-n <span class="hljs-keyword">BOOK_NUM </span>-email YOU_EMAIL -p YOU_PASSWORD<br></code></pre></td></tr></table></figure><p>完成后 mobi 会生成在当前目录下。</p><h2 id="技术总结"><a href="#技术总结" class="headerlink" title="技术总结"></a>技术总结</h2><p>咱要 kindle 用，首先研究下 mobi 的生成。有两个特定格式的文件，一个 ncx (组织目录)，一个 opf (组织所有文件)，按格式来就能生成。开始梳理需要的资源看看可行性。完事准备写程序都爬下来，生成所需的格式，用 kindlegen 测试生成 mobi，大问题没有小问题不少，挨个解决。最后发现实现登录也不难索性加上了。编写过程中看了很多 go 原生包也使用了不少。</p><p>golang 需要注意的点不完全总结：</p><ul><li><code>go func(){}()</code> 实际执行的时间与其所属语句执行时间是不一样的。</li><li>通过 <code>chan</code> 控制并发。</li><li>大量字符串拼接不要用 <code>+</code> 时间与空间上都复杂。可用使用 <code>strings.Builder{}</code> 字节切片的概念。</li><li><code>os.Exit()</code> 结束程序后，<code>defer</code> 不会执行。</li><li>有问题多看看官方文档比什么都强 :)。</li></ul>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> Go </tag>
+            
+            <tag> 爬虫 </tag>
+            
+            <tag> Kindle </tag>
+            
+            <tag> mobi </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>容器服务化方向的一些探索</title>
       <link href="/2019/08/28/docker_traefik_micro_service/"/>
       <url>/2019/08/28/docker_traefik_micro_service/</url>
@@ -79,11 +104,11 @@
       
         <tags>
             
+            <tag> Go </tag>
+            
             <tag> PHP </tag>
             
             <tag> Swoole </tag>
-            
-            <tag> Go </tag>
             
             <tag> TCP </tag>
             

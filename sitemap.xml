@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://ibelieving.io/2019/10/31/golang_generate_oreilly_kindle_book/</loc>
+    
+    <lastmod>2019-10-31T13:58:41.959Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://ibelieving.io/2019/08/28/docker_traefik_micro_service/</loc>
     
     <lastmod>2019-08-28T09:31:51.783Z</lastmod>
