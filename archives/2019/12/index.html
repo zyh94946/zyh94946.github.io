@@ -21,7 +21,7 @@
     </script>
     
     
-    <title>编写Go的TCP服务来替代PHP的Swoole | ibelieving.io - 技术分享 - 行者无疆</title>
+    <title>归档 | ibelieving.io - 技术分享 - 行者无疆</title>
     
     <meta name="keywords" content="微服务, 架构设计, 高可用, PHP, Go, Linux">
     
@@ -177,101 +177,28 @@
         <div class="main-container">
           <div class="content">
             
-<div id="post" class="page">
+<div id="archive" class="archive page">
+  
+  
+  
+  
+  <h2 class="page-title">2019
   
   <article class="article post card" itemscope itemtype="https://schema.org/Article">
-    <div class="post-block">
-      <link itemprop="mainEntityOfPage" href="https://ibelieving.io/2019/04/30/swoole_to_go_serv/">
-      <span hidden itemprop="author" itemscope itemtype="https://schema.org/Person">
-       <meta itemprop="name" content="Zhongyang Hao">
-       <meta itemprop="description" content="关注互联网架构设计、高可用、微服务化、PHP、Go。">
-       <meta itemprop="image" content="/images/avatar.gif">
+    <header id="post-header" class="post-header">
+      <h3 class="post-title-simple" itemprop="name headline">
+        <a class="post-title-link post-title-link-external" href="/2019/12/23/golang_and_php_json/" itemprop="url">Golang 与 PHP 的 json 序列化问题</a>
+      </h3>
+      
+      <span class="post-date">
+        <time title="post-date" itemprop="dateCreated datePublished" datetime="2019-12-23T22:32:00+08:00">12-23</time>
       </span>
-      <span hidden itemprop="publisher" itemscope itemtype="https://schema.org/Organization">
-       <meta itemprop="name" content="ibelieving.io - 技术分享">
-      </span>
-    </div>
-    <header class="post-header">
-      <h1 class="post-title" itemprop="name headline">编写Go的TCP服务来替代PHP的Swoole</h1>
-      <div class="post-meta">
-        
-        <span class="post-date">
-          <i class="far fa-calendar-plus"></i><span><time title="post-date" itemprop="dateCreated datePublished" datetime="2019-04-30T21:22:46+08:00">2019-04-30 21:22:46</time></span>
-        </span>
-        
-        
-      </div>
+      
     </header>
-    <main class="post-main" itemprop="articleBody">
-      <h2 id="背景说明"><a href="#背景说明" class="headerlink" title="背景说明"></a>背景说明</h2><p>目前公司采用微服务架构，主要开发语言为PHP，通过Swoole开启TCP服务供业务端调用。通过公司内部编写的PHP扩展封装客户端调用逻辑。</p>
-<h2 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h2><p>暂定使用Go语言开发新的业务，并提供TCP服务。其中老的PHP项目要通过原有的客户端扩展实现无修改调用。</p>
-<h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><p>通过阅读客户端扩展源码了解调用逻辑。编写简单的测试如下。</p>
-<figure class="hljs highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-meta">&lt;?php</span><br><br>$_client = <span class="hljs-keyword">new</span> \swoole_client(SWOOLE_SOCK_TCP | SWOOLE_KEEP);<br>$_client-&gt;set([<br>    <span class="hljs-string">'open_length_check'</span> =&gt; <span class="hljs-keyword">true</span>,<br>    <span class="hljs-string">'package_length_type'</span> =&gt; <span class="hljs-string">'N'</span>,<br>    <span class="hljs-string">'package_length_offset'</span> =&gt; <span class="hljs-number">0</span>,<br>    <span class="hljs-string">'package_body_offset'</span> =&gt; <span class="hljs-number">4</span>,<br>    <span class="hljs-string">'package_max_length'</span> =&gt; <span class="hljs-number">24657920</span>,<br>]);<br><span class="hljs-keyword">if</span> (<span class="hljs-keyword">false</span> == $_client-&gt;connect(<span class="hljs-string">"127.0.0.1"</span>, <span class="hljs-number">8880</span>)) &#123;<br>    printf(<span class="hljs-string">"err_msg: %s err_code: %s"</span> . PHP_EOL, var_export($_client-&gt;errMsg, <span class="hljs-keyword">true</span>), var_export($_client-&gt;errCode, <span class="hljs-keyword">true</span>));<br>&#125;<br><br><span class="hljs-comment">// 随便测试个请求参数</span><br>$data = [<br>    <span class="hljs-string">'api'</span> =&gt; <span class="hljs-string">'getUserInfo'</span>,<br>    <span class="hljs-string">'params'</span> =&gt; [<br>        <span class="hljs-string">'user_id'</span> =&gt; <span class="hljs-number">123</span><br>    ]<br>];<br>$data = json_encode($data);<br>$data = gzcompress($data, <span class="hljs-number">9</span>);<br>$_client-&gt;send(pack(<span class="hljs-string">"N"</span>, strlen($data)) . $data);<br><br>$res = $_client-&gt;recv();<br>$end = getTime();<br><br>$data = json_decode($res, <span class="hljs-keyword">true</span>);<br></code></pre></td></tr></table></figure>
-<p>其中前4个字节是head，表示body长度，采用二进制大端字节序编码。body先进行json编码再进行了zlib压缩。这都是编写Go的TCP服务时需要处理的。</p>
-<p>写个简单的Go TCP服务试试，先不考虑过多的错误边界处理。</p>
-<figure class="hljs highlight Go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br></pre></td><td class="code"><pre><code class="hljs Go"><span class="hljs-keyword">package</span> main<br><br><span class="hljs-keyword">import</span> (<br>	<span class="hljs-string">"bytes"</span><br>	<span class="hljs-string">"compress/zlib"</span><br>	<span class="hljs-string">"encoding/binary"</span><br>	<span class="hljs-string">"fmt"</span><br>	<span class="hljs-string">"io"</span><br>	<span class="hljs-string">"net"</span><br>)<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br>	ln, err := net.Listen(<span class="hljs-string">"tcp"</span>, <span class="hljs-string">":8880"</span>)<br>	<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> &#123;<br>		fmt.Printf(<span class="hljs-string">"%s"</span>, err)<br>	&#125;<br>	<span class="hljs-keyword">for</span> &#123;<br>		conn, err := ln.Accept()<br>		<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> &#123;<br>			fmt.Printf(<span class="hljs-string">"accept err:%s"</span>, err)<br>		&#125;<br>		<span class="hljs-keyword">go</span> handleConnection(conn)<br>	&#125;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">handleConnection</span><span class="hljs-params">(conn net.Conn)</span></span> &#123;<br>	fmt.Println(<span class="hljs-string">"on conn"</span>)<br><br>	<span class="hljs-keyword">var</span> err error<br>	headLen := <span class="hljs-number">4</span><br>	head := <span class="hljs-built_in">make</span>([]<span class="hljs-keyword">byte</span>, headLen)<br>	<span class="hljs-keyword">if</span> _, err = conn.Read(head); err != <span class="hljs-literal">nil</span> &#123;<br>		fmt.Println(err.Error())<br>		<span class="hljs-keyword">return</span><br>	&#125;<br><br>	<span class="hljs-comment">// 解码大端字节序获取body长度</span><br>	bodyLen := binary.BigEndian.Uint32(head)<br><br>	allBody := <span class="hljs-built_in">make</span>([]<span class="hljs-keyword">byte</span>, <span class="hljs-number">0</span>)<br>	readLen := <span class="hljs-number">0</span><br>	<span class="hljs-keyword">for</span> bodyLen &gt; <span class="hljs-number">0</span> &#123;<br>		body := <span class="hljs-built_in">make</span>([]<span class="hljs-keyword">byte</span>, bodyLen)<br>		readLen, err = conn.Read(body)<br>		<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> &#123;<br>			fmt.Println(err.Error())<br>			<span class="hljs-keyword">return</span><br>		&#125;<br><br>		bodyLen = bodyLen - <span class="hljs-keyword">uint32</span>(readLen)<br>		allBody = <span class="hljs-built_in">append</span>(allBody, body[:readLen]...)<br>	&#125;<br><br>	<span class="hljs-comment">// 解压zlib压缩的数据 RFC 1950</span><br>	b := bytes.NewReader(allBody)<br>	uncompressRead, err := zlib.NewReader(b)<br>	<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> &#123;<br>		fmt.Printf(<span class="hljs-string">"uncompress data err:%s"</span>, err)<br>	&#125;<br>	<span class="hljs-keyword">var</span> uncompressData bytes.Buffer<br>	io.Copy(&amp;uncompressData, uncompressRead)<br><br>	<span class="hljs-comment">// 解出的json字符串</span><br>	fmt.Printf(<span class="hljs-string">"Received:%s"</span>, uncompressData.Bytes())<br><br>	<span class="hljs-comment">// 路由调用实际业务逻辑处理 ...</span><br>	<span class="hljs-comment">// conn.Write()</span><br><br>	conn.Close()<br>	<span class="hljs-keyword">return</span><br>&#125;<br></code></pre></td></tr></table></figure>
-<p>运行Go的TCP服务，跑一个PHP请求测试。</p>
-<figure class="hljs highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell">on conn<br>Received:&#123;"api":"getUserInfo","params":&#123;"user_id":123&#125;&#125;<br></code></pre></td></tr></table></figure>
-<p>经过多次修改测试终于成功。</p>
-
-    </main>
-    <footer class="post-footer">
-      
-      <div class="post-tags">
-        
-        <a class="post-tag button" href="/tags/Go/" rel="tag"><i class="fas fa-tags"></i>Go</a>
-        
-        <a class="post-tag button" href="/tags/PHP/" rel="tag"><i class="fas fa-tags"></i>PHP</a>
-        
-        <a class="post-tag button" href="/tags/Swoole/" rel="tag"><i class="fas fa-tags"></i>Swoole</a>
-        
-        <a class="post-tag button" href="/tags/TCP/" rel="tag"><i class="fas fa-tags"></i>TCP</a>
-        
-      </div>
-      
-    </footer>
   </article>
   
   
-  <nav class="page-nav">
-    <div class="page-nav-next page-nav-item">
-      
-      <a href="/2019/01/08/php5_error_handle/" rel="next" title="PHP5下的Error错误处理及问题定位"><i class="fas fa-angle-left"></i><span class="nav-title">PHP5下的Error错误处理及问题定位</span></a>
-      
-    </div>
-    <div class="page-nav-prev page-nav-item">
-      
-      <a href="/2019/05/07/jetbrains_ide_compare_text/" rel="prev" title="JetBrains IDE 文件对比功能"><span class="nav-title">JetBrains IDE 文件对比功能</span><i class="fas fa-angle-right"></i></a>
-      
-    </div>
-  </nav>
-  
-  
-  
-
-
-<link rel="stylesheet" href="//api.ibelieving.io/src/iDisqus.min.css?v=20190831">
-<script src="//api.ibelieving.io/src/iDisqus.min.js?v=20190831"></script>  
-<div id="comment"></div>
-<script>
-    var disq = new iDisqus('comment', {
-        forum: 'ibelieving',
-        site: 'https://ibelieving.io',
-        api: 'https://api.ibelieving.io/api',
-        url: '2019/04/30/swoole_to_go_serv/',
-        mode: 1,
-        timeout: 2000,
-        init: true,
-        emojiPreview: true
-    });
-    disq.count();
-</script>
-
-
-
-
-  
-</div>
+</h2></div>
 
           </div>
           
@@ -338,17 +265,6 @@
 
 
   <div class="sidebar-sticky">
-    
-    
-    
-    
-    
-    <hr>
-    <div class="post-toc sidebar-item" id="toc-div">
-      <div><i class="fas fa-list-ol"></i>文章目录</div>
-      <div class="post-toc-content"><ol class="list-group toc"><li class="toc-item toc-level-2"><a class="list-group-item toc-link" href="#背景说明"><span class="toc-text">背景说明</span></a></li><li class="toc-item toc-level-2"><a class="list-group-item toc-link" href="#需求"><span class="toc-text">需求</span></a></li><li class="toc-item toc-level-2"><a class="list-group-item toc-link" href="#解决方案"><span class="toc-text">解决方案</span></a></li></ol></div>
-    </div>
-    
     
     
     
