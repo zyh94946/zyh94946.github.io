@@ -239,13 +239,15 @@
       <ul class="blog-sidebar-tags-ul blog-sidebar-padding">
         
           
-            <li><a href="/tags/Go/" class="tag-could" data-toggle="tooltip" data-placement="top" title="Go">Go</a></li>
+            <li><a href="/tags/Docker/" class="tag-could" data-toggle="tooltip" data-placement="top" title="Docker">Docker</a></li>
+          
+            <li><a href="/tags/微服务/" class="tag-could" data-toggle="tooltip" data-placement="top" title="微服务">微服务</a></li>
           
             <li><a href="/tags/PHP/" class="tag-could" data-toggle="tooltip" data-placement="top" title="PHP">PHP</a></li>
           
-            <li><a href="/tags/源码/" class="tag-could" data-toggle="tooltip" data-placement="top" title="源码">源码</a></li>
+            <li><a href="/tags/Swoole/" class="tag-could" data-toggle="tooltip" data-placement="top" title="Swoole">Swoole</a></li>
           
-            <li><a href="/tags/IDE/" class="tag-could" data-toggle="tooltip" data-placement="top" title="IDE">IDE</a></li>
+            <li><a href="/tags/Go/" class="tag-could" data-toggle="tooltip" data-placement="top" title="Go">Go</a></li>
           
             <li><a href="/tags/爬虫/" class="tag-could" data-toggle="tooltip" data-placement="top" title="爬虫">爬虫</a></li>
           
@@ -253,15 +255,13 @@
           
             <li><a href="/tags/mobi/" class="tag-could" data-toggle="tooltip" data-placement="top" title="mobi">mobi</a></li>
           
+            <li><a href="/tags/IDE/" class="tag-could" data-toggle="tooltip" data-placement="top" title="IDE">IDE</a></li>
+          
+            <li><a href="/tags/源码/" class="tag-could" data-toggle="tooltip" data-placement="top" title="源码">源码</a></li>
+          
             <li><a href="/tags/RabbitMQ/" class="tag-could" data-toggle="tooltip" data-placement="top" title="RabbitMQ">RabbitMQ</a></li>
           
-            <li><a href="/tags/Swoole/" class="tag-could" data-toggle="tooltip" data-placement="top" title="Swoole">Swoole</a></li>
-          
             <li><a href="/tags/TCP/" class="tag-could" data-toggle="tooltip" data-placement="top" title="TCP">TCP</a></li>
-          
-            <li><a href="/tags/Docker/" class="tag-could" data-toggle="tooltip" data-placement="top" title="Docker">Docker</a></li>
-          
-            <li><a href="/tags/微服务/" class="tag-could" data-toggle="tooltip" data-placement="top" title="微服务">微服务</a></li>
           
         
       </ul>
@@ -288,11 +288,17 @@
 <script>
   var canvas = document.getElementById("bg-cas");
   var ctx = canvas.getContext("2d");
+  const pixelRatio = window.devicePixelRatio || 1;
   resize();
   window.onresize = resize;
   function resize() {
-    canvas.width = document.getElementById("sidebar").offsetWidth;
-    canvas.height = document.getElementById("sidebar").offsetHeight;
+    canWidth = document.getElementById("sidebar").offsetWidth;
+    canHeight = document.getElementById("sidebar").offsetHeight;
+    canvas.width = canWidth * pixelRatio;
+    canvas.height = canHeight * pixelRatio;
+    canvas.style.width = canWidth + 'px';
+    canvas.style.height = canHeight + 'px';
+    ctx.scale(pixelRatio, pixelRatio);
     canvas.style.top = document.getElementById("sidebar").offsetTop + "px";
   }
   var RAF = (function() {
@@ -315,7 +321,7 @@
   // 添加粒子
   // x，y为粒子坐标，xa, ya为粒子xy轴加速度，max为连线的最大距离
   var dots = [];
-  for (var i = 0; i < 150; i++) {
+  for (var i = 0; i < 200 * pixelRatio; i++) {
     var x = Math.random() * canvas.width;
     var y = Math.random() * canvas.height;
     var xa = Math.random() * 2 - 1;

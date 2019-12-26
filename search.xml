@@ -14,9 +14,9 @@
       
         <tags>
             
-            <tag> Go </tag>
-            
             <tag> PHP </tag>
+            
+            <tag> Go </tag>
             
             <tag> 源码 </tag>
             
@@ -62,13 +62,13 @@
       
         <tags>
             
-            <tag> PHP </tag>
-            
-            <tag> Swoole </tag>
-            
             <tag> Docker </tag>
             
             <tag> 微服务 </tag>
+            
+            <tag> PHP </tag>
+            
+            <tag> Swoole </tag>
             
         </tags>
       
@@ -127,11 +127,11 @@
       
         <tags>
             
-            <tag> Go </tag>
-            
             <tag> PHP </tag>
             
             <tag> Swoole </tag>
+            
+            <tag> Go </tag>
             
             <tag> TCP </tag>
             
