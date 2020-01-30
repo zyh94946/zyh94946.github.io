@@ -4,6 +4,25 @@
   
     
     <entry>
+      <title>年前线上问题总结</title>
+      <link href="/2020/01/30/last_bug_for_2019/"/>
+      <url>/2020/01/30/last_bug_for_2019/</url>
+      
+        <content type="html"><![CDATA[<h2 id="Intro"><a href="#Intro" class="headerlink" title="Intro"></a>Intro</h2><p>在家中除了带娃、看书也无事可做。把节前值班遇到的问题总结下。</p><p>除夕那天我们公司依然正常上班，很多同事都已经提前回家了，在的人也不多，中午吃完饭没什么事就都走了。突然领导发来贺电以为什么好事，居然线上出问题了。前端同事反馈后端无响应，这个反馈也是没谁了，问了下具体调用的后端url，某个同事的 php 项目，没辙硬上吧。找运维查了下对应的机器有四台，先上 kibana 看下 nginx access 日志有大量请求404，error 日志没问题。再看 php error 日志有响应很慢的请求，应该是进来了，再看下 php 慢日志看调用栈应该是走到了一个 redis 类。这时候运维还在先让运维看下 redis 有问题没。我接着追代码，看代码发现这老哥没用框架定义的 redis 实例化类，自己整了个，真难受啊，一行行看 redis 配置从哪取的八成是这 redis 的问题。这时候运维反馈线上 redis 没问题。我接着撸代码，终于看到调的配置名了，去项目下 grep 下。这一搜发现这个配置有测试环境的，有预发环境的，还有个默认的配置，线上配置文件没有，不用说线上环境肯定用的默认的配置，默认的配的是测试环境的 redis。然而测试环境因为春节放假都关机了。</p><p>问题查清楚了，加上了线上环境的 redis 配置。</p><p>但是这个 bug 太tm智障了，全是问题。</p><h3 id="生产环境-调-测试环境"><a href="#生产环境-调-测试环境" class="headerlink" title="生产环境 调 测试环境"></a>生产环境 调 测试环境</h3><p>生产环境和测试环境要实现网络隔离，配置文件方式还是有点老，整个配置中心。</p><h3 id="自行实现-redis-类"><a href="#自行实现-redis-类" class="headerlink" title="自行实现 redis 类"></a>自行实现 redis 类</h3><p>框架已经提供了 redis 类，还要自行实现，直接影响排查效率。屏蔽了 redis 链接不上，然后给前端扔了个 404。没有规矩不成方圆要多 code review 啊。</p><h2 id="另"><a href="#另" class="headerlink" title="另"></a>另</h2><p>最近新型冠状病毒肆虐异常，各地陆续启动公共卫生事件一级响应，春节假期国家也延长到了正月初十。北京这边有的村不让从外回京的人进村，要外隔离，也是没谁了。</p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> PHP </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Golang 与 PHP 的 json 序列化问题</title>
       <link href="/2019/12/23/golang_and_php_json/"/>
       <url>/2019/12/23/golang_and_php_json/</url>

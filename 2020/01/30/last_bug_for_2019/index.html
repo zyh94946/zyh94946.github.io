@@ -21,7 +21,7 @@
     </script>
     
     
-    <title>标签: 源码 | ibelieving.io - 技术分享 - 行者无疆</title>
+    <title>年前线上问题总结 | ibelieving.io - 技术分享 - 行者无疆</title>
     
     <meta name="keywords" content="微服务, 架构设计, 高可用, PHP, Go, Linux">
     
@@ -177,35 +177,88 @@
         <div class="main-container">
           <div class="content">
             
-<div id="tag" class="tag page">
-  <h1 class="page-title">源码</h1>
+<div id="post" class="page">
   
   <article class="article post card" itemscope itemtype="https://schema.org/Article">
-    <header id="post-header" class="post-header">
-      <h1 class="post-title-simple" itemprop="name headline">
-        <a class="post-title-link post-title-link-external" href="/2019/12/23/golang_and_php_json/" itemprop="url">Golang 与 PHP 的 json 序列化问题</a>
-      </h1>
-      
-      <span class="post-date">
-        <time title="post-date" itemprop="dateCreated datePublished" datetime="2019-12-23T22:32:00+08:00">12-23</time>
+    <div class="post-block">
+      <link itemprop="mainEntityOfPage" href="https://ibelieving.io/2020/01/30/last_bug_for_2019/">
+      <span hidden itemprop="author" itemscope itemtype="https://schema.org/Person">
+       <meta itemprop="name" content="Zhongyang Hao">
+       <meta itemprop="description" content="关注互联网架构设计、高可用、微服务化、PHP、Go。">
+       <meta itemprop="image" content="/images/avatar.gif">
       </span>
-      
+      <span hidden itemprop="publisher" itemscope itemtype="https://schema.org/Organization">
+       <meta itemprop="name" content="ibelieving.io - 技术分享">
+      </span>
+    </div>
+    <header class="post-header">
+      <h1 class="post-title" itemprop="name headline">年前线上问题总结</h1>
+      <div class="post-meta">
+        
+        <span class="post-date">
+          <i class="far fa-calendar-plus"></i><span><time title="post-date" itemprop="dateCreated datePublished" datetime="2020-01-30T23:46:46+08:00">2020-01-30 23:46:46</time></span>
+        </span>
+        
+        
+      </div>
     </header>
+    <main class="post-main" itemprop="articleBody">
+      <h2 id="Intro"><a href="#Intro" class="headerlink" title="Intro"></a>Intro</h2><p>在家中除了带娃、看书也无事可做。把节前值班遇到的问题总结下。</p>
+<p>除夕那天我们公司依然正常上班，很多同事都已经提前回家了，在的人也不多，中午吃完饭没什么事就都走了。突然领导发来贺电以为什么好事，居然线上出问题了。前端同事反馈后端无响应，这个反馈也是没谁了，问了下具体调用的后端url，某个同事的 php 项目，没辙硬上吧。找运维查了下对应的机器有四台，先上 kibana 看下 nginx access 日志有大量请求404，error 日志没问题。再看 php error 日志有响应很慢的请求，应该是进来了，再看下 php 慢日志看调用栈应该是走到了一个 redis 类。这时候运维还在先让运维看下 redis 有问题没。我接着追代码，看代码发现这老哥没用框架定义的 redis 实例化类，自己整了个，真难受啊，一行行看 redis 配置从哪取的八成是这 redis 的问题。这时候运维反馈线上 redis 没问题。我接着撸代码，终于看到调的配置名了，去项目下 grep 下。这一搜发现这个配置有测试环境的，有预发环境的，还有个默认的配置，线上配置文件没有，不用说线上环境肯定用的默认的配置，默认的配的是测试环境的 redis。然而测试环境因为春节放假都关机了。</p>
+<p>问题查清楚了，加上了线上环境的 redis 配置。</p>
+<p>但是这个 bug 太tm智障了，全是问题。</p>
+<h3 id="生产环境-调-测试环境"><a href="#生产环境-调-测试环境" class="headerlink" title="生产环境 调 测试环境"></a>生产环境 调 测试环境</h3><p>生产环境和测试环境要实现网络隔离，配置文件方式还是有点老，整个配置中心。</p>
+<h3 id="自行实现-redis-类"><a href="#自行实现-redis-类" class="headerlink" title="自行实现 redis 类"></a>自行实现 redis 类</h3><p>框架已经提供了 redis 类，还要自行实现，直接影响排查效率。屏蔽了 redis 链接不上，然后给前端扔了个 404。没有规矩不成方圆要多 code review 啊。</p>
+<h2 id="另"><a href="#另" class="headerlink" title="另"></a>另</h2><p>最近新型冠状病毒肆虐异常，各地陆续启动公共卫生事件一级响应，春节假期国家也延长到了正月初十。北京这边有的村不让从外回京的人进村，要外隔离，也是没谁了。</p>
+
+    </main>
+    <footer class="post-footer">
+      
+      <div class="post-tags">
+        
+        <a class="post-tag button" href="/tags/PHP/" rel="tag"><i class="fas fa-tags"></i>PHP</a>
+        
+      </div>
+      
+    </footer>
   </article>
   
-  <article class="article post card" itemscope itemtype="https://schema.org/Article">
-    <header id="post-header" class="post-header">
-      <h1 class="post-title-simple" itemprop="name headline">
-        <a class="post-title-link post-title-link-external" href="/2019/05/22/php7_function_sort/" itemprop="url">PHP7 数组排序函数源码解析</a>
-      </h1>
-      
-      <span class="post-date">
-        <time title="post-date" itemprop="dateCreated datePublished" datetime="2019-05-22T19:14:33+08:00">05-22</time>
-      </span>
-      
-    </header>
-  </article>
   
+  <nav class="page-nav">
+    <div class="page-nav-next page-nav-item">
+      
+      <a href="/2019/12/23/golang_and_php_json/" rel="next" title="Golang 与 PHP 的 json 序列化问题"><i class="fas fa-angle-left"></i><span class="nav-title">Golang 与 PHP 的 json 序列化问题</span></a>
+      
+    </div>
+    <div class="page-nav-prev page-nav-item">
+      
+    </div>
+  </nav>
+  
+  
+  
+
+
+<link rel="stylesheet" href="//api.ibelieving.io/src/iDisqus.min.css?v=20190831">
+<script src="//api.ibelieving.io/src/iDisqus.min.js?v=20190831"></script>  
+<div id="comment"></div>
+<script>
+    var disq = new iDisqus('comment', {
+        forum: 'ibelieving',
+        site: 'https://ibelieving.io',
+        api: 'https://api.ibelieving.io/api',
+        url: '2020/01/30/last_bug_for_2019/',
+        mode: 1,
+        timeout: 2000,
+        init: true,
+        emojiPreview: true
+    });
+    disq.count();
+</script>
+
+
+
+
   
 </div>
 
@@ -274,6 +327,17 @@
 
 
   <div class="sidebar-sticky">
+    
+    
+    
+    
+    
+    <hr>
+    <div class="post-toc sidebar-item" id="toc-div">
+      <div><i class="fas fa-list-ol"></i>文章目录</div>
+      <div class="post-toc-content"><ol class="list-group toc"><li class="toc-item toc-level-2"><a class="list-group-item toc-link" href="#Intro"><span class="toc-text">Intro</span></a><ol class="list-group toc-child"><li class="toc-item toc-level-3"><a class="list-group-item toc-link" href="#生产环境-调-测试环境"><span class="toc-text">生产环境 调 测试环境</span></a></li><li class="toc-item toc-level-3"><a class="list-group-item toc-link" href="#自行实现-redis-类"><span class="toc-text">自行实现 redis 类</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="list-group-item toc-link" href="#另"><span class="toc-text">另</span></a></li></ol></div>
+    </div>
+    
     
     
     
