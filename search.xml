@@ -14,13 +14,13 @@
       
         <tags>
             
-            <tag> Docker </tag>
-            
-            <tag> 微服务 </tag>
-            
             <tag> Consul </tag>
             
             <tag> Traefik </tag>
+            
+            <tag> Docker </tag>
+            
+            <tag> 微服务 </tag>
             
         </tags>
       
