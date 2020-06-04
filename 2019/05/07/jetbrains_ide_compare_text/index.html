@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
-  <head><meta name="generator" content="Hexo 3.8.0">
+  <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -42,13 +42,11 @@
     <link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#000000">
     
     
-    <link rel="manifest" href="/favicons/site.webmanifest">
-    
     
     <meta name="msapplication-config" content="/favicons/browserconfig.xml">
     
     
-    <link rel="alternate" href="/atom.xml" title="ibelieving.io - 技术分享" type="application/atom+xml">
+    <link rel="alternate" href="/atom.xml" title="ibelieving.io - 技术分享" type="application/atom+xml" />
     
     
     <link rel="shortcut icon" type="image/x-icon" href="/favicons/favicon.ico">
@@ -146,8 +144,8 @@
     </script>
     
     <script defer type="text/javascript" src="/js/custom.js"></script>
-  </head>
-  <body itemscope itemtype="https://schema.org/WebPage" lang="zh-CN" data-spy="scroll" data-target=".list-group">
+  <meta name="generator" content="Hexo 4.2.1"></head>
+  <body itemscope itemtype="https://schema.org/WebPage" lang="zh-CN"  data-spy="scroll" data-target=".list-group">
     
 <header id="header" class="header" style="background-color: #000000;">
   <div class="container">
@@ -239,21 +237,38 @@
   
 
 
-<link rel="stylesheet" href="//api.ibelieving.io/src/iDisqus.min.css?v=20190831">
-<script src="//api.ibelieving.io/src/iDisqus.min.js?v=20190831"></script>  
-<div id="comment"></div>
+<link rel="stylesheet" href="//localhost:4000/css/disqusjs.css" />
+<script src="//localhost:4000/js/disqus.js"></script>  
+<div id="disqus_thread"></div>
 <script>
-    var disq = new iDisqus('comment', {
-        forum: 'ibelieving',
-        site: 'https://ibelieving.io',
-        api: 'https://api.ibelieving.io/api',
-        url: '2019/05/07/jetbrains_ide_compare_text/',
-        mode: 1,
-        timeout: 2000,
-        init: true,
-        emojiPreview: true
+function loadDisqus() {
+    var dsqjs = new DisqusJS({
+    shortname: 'ibelieving',
+    siteName: 'ibelieving',
+    identifier: '2019/05/07/jetbrains_ide_compare_text/',
+    api: 'https://disqus.ibelieving.io/disqus/',
+    apikey: '9ebkpJDVO7mV3AXNvjzm7yT66bCF90NjxSPb99u4eWRDHC2n5VBYkm7Si7abA3oy',
     });
-    disq.count();
+}
+
+var runningOnBrowser = typeof window !== "undefined";
+var isBot = runningOnBrowser && !("onscroll" in window) || typeof navigator !== "undefined" && /(gle|ing|ro|msn)bot|crawl|spider|yand|duckgo/i.test(navigator.userAgent);
+var supportsIntersectionObserver = runningOnBrowser && "IntersectionObserver" in window;
+
+setTimeout(function () {
+  if (!isBot && supportsIntersectionObserver) {
+    var disqus_observer = new IntersectionObserver(function(entries) {
+      if (entries[0].isIntersecting) {
+        loadDisqus();
+        disqus_observer.disconnect();
+      }
+    }, { threshold: [0] });
+    disqus_observer.observe(document.getElementById('disqus_thread'));
+  } else {
+    loadDisqus();
+  }
+}, 1);
+
 </script>
 
 
@@ -270,7 +285,7 @@
   
   <div class="search">
     <div class="form-group">
-      <i class="fas fa-search"></i><input type="search" id="search-input" name="q" results="0" placeholder="搜索" class="form-control">
+      <i class="fas fa-search"></i><input type="search" id="search-input" name="q" results="0" placeholder="搜索" class="form-control"/>
     </div>
   </div>
   <div class="search-result-box" id="search-result"></div>
@@ -287,31 +302,31 @@
       <ul class="blog-sidebar-tags-ul blog-sidebar-padding">
         
           
-            <li><a href="/tags/Docker/" class="tag-could" data-toggle="tooltip" data-placement="top" title="Docker">Docker</a></li>
-          
-            <li><a href="/tags/微服务/" class="tag-could" data-toggle="tooltip" data-placement="top" title="微服务">微服务</a></li>
-          
-            <li><a href="/tags/PHP/" class="tag-could" data-toggle="tooltip" data-placement="top" title="PHP">PHP</a></li>
-          
-            <li><a href="/tags/Swoole/" class="tag-could" data-toggle="tooltip" data-placement="top" title="Swoole">Swoole</a></li>
-          
-            <li><a href="/tags/Consul/" class="tag-could" data-toggle="tooltip" data-placement="top" title="Consul">Consul</a></li>
-          
-            <li><a href="/tags/Traefik/" class="tag-could" data-toggle="tooltip" data-placement="top" title="Traefik">Traefik</a></li>
-          
             <li><a href="/tags/Go/" class="tag-could" data-toggle="tooltip" data-placement="top" title="Go">Go</a></li>
           
-            <li><a href="/tags/爬虫/" class="tag-could" data-toggle="tooltip" data-placement="top" title="爬虫">爬虫</a></li>
+            <li><a href="/tags/%E7%88%AC%E8%99%AB/" class="tag-could" data-toggle="tooltip" data-placement="top" title="爬虫">爬虫</a></li>
           
             <li><a href="/tags/Kindle/" class="tag-could" data-toggle="tooltip" data-placement="top" title="Kindle">Kindle</a></li>
           
             <li><a href="/tags/mobi/" class="tag-could" data-toggle="tooltip" data-placement="top" title="mobi">mobi</a></li>
           
-            <li><a href="/tags/源码/" class="tag-could" data-toggle="tooltip" data-placement="top" title="源码">源码</a></li>
-          
             <li><a href="/tags/IDE/" class="tag-could" data-toggle="tooltip" data-placement="top" title="IDE">IDE</a></li>
           
+            <li><a href="/tags/Docker/" class="tag-could" data-toggle="tooltip" data-placement="top" title="Docker">Docker</a></li>
+          
+            <li><a href="/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/" class="tag-could" data-toggle="tooltip" data-placement="top" title="微服务">微服务</a></li>
+          
+            <li><a href="/tags/PHP/" class="tag-could" data-toggle="tooltip" data-placement="top" title="PHP">PHP</a></li>
+          
+            <li><a href="/tags/Swoole/" class="tag-could" data-toggle="tooltip" data-placement="top" title="Swoole">Swoole</a></li>
+          
             <li><a href="/tags/RabbitMQ/" class="tag-could" data-toggle="tooltip" data-placement="top" title="RabbitMQ">RabbitMQ</a></li>
+          
+            <li><a href="/tags/%E6%BA%90%E7%A0%81/" class="tag-could" data-toggle="tooltip" data-placement="top" title="源码">源码</a></li>
+          
+            <li><a href="/tags/Consul/" class="tag-could" data-toggle="tooltip" data-placement="top" title="Consul">Consul</a></li>
+          
+            <li><a href="/tags/Traefik/" class="tag-could" data-toggle="tooltip" data-placement="top" title="Traefik">Traefik</a></li>
           
             <li><a href="/tags/TCP/" class="tag-could" data-toggle="tooltip" data-placement="top" title="TCP">TCP</a></li>
           
