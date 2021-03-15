@@ -4,6 +4,27 @@
   
     
     <entry>
+      <title>通过企业微信构建消息推送服务</title>
+      <link href="/2021/03/15/wx_work_msg_push/"/>
+      <url>/2021/03/15/wx_work_msg_push/</url>
+      
+        <content type="html"><![CDATA[<p>之前用server酱的微信消息推送服务，但是最近老抽风，准备换别的推送服务。</p><p>目前发现企业微信的应用消息很合适优点不少。个人也可注册使用。</p><ul><li>图文消息 mpnews 内容最大支持666K字节</li><li>一次可最多发送八条消息，虽然基本都是发单条</li><li>可以显示摘要</li><li>可以消息免打扰</li></ul><p><img src="/images/wx_work_msg_push.png" alt="图文消息摘要效果"></p><p>虽然是企业微信的应用消息，但是通过关注微信插件可以直接在微信app内查看消息。</p><p>简单使用 Golang 编写了一个腾讯 Serverless 云函数，实现了类似于server酱的消息推送，GET、POST方式调用均可。</p><p>腾讯云函数目前每月都有免费额度个人完全够用了，API网关新开会送一年资源包也是够用完全白嫖。可以绑定自有域名，选择香港区域，不用备案。</p><p>一年到期之后，可以转战阿里云。代码很简单，改改也可以直接docker部署。</p><p>详见GitHub <a href="https://github.com/zyh94946/wx-msg-push-tencent" target="_blank" rel="noopener">wx-msg-push-tencent</a></p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> Golang </tag>
+            
+            <tag> Serverless </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>微信小程序变现与分析</title>
       <link href="/2021/03/07/wx_mini_program_ad/"/>
       <url>/2021/03/07/wx_mini_program_ad/</url>
