@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://ibelieving.io/"/>
-  <updated>2022-03-31T02:06:49.329Z</updated>
+  <updated>2022-06-25T13:52:35.631Z</updated>
   <id>https://ibelieving.io/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>KubeSphere k8s 集群管理</title>
+    <link href="https://ibelieving.io/2022/06/25/kubesphere/"/>
+    <id>https://ibelieving.io/2022/06/25/kubesphere/</id>
+    <published>2022-06-25T12:00:00.000Z</published>
+    <updated>2022-06-25T13:52:35.631Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>KubeSphere 是一个 k8s 集群管理平台，可以管理多云多集群，进行统一的应用分发和运维管理，避免云厂商绑定。提供了运维友好的操作界面，支持多租户，DevOps，服务网格，多种监控纬度。</p><p>目前稳定版是 KubeSphere v3.2.1，我之前装的 k8s 集群是 v1.22.7，KubeSphere 目前对 v1.22 是实验性支持，为了避免踩坑先把 k8s 集群重装了 v1.21.5。</p><h2 id="安装使用"><a href="#安装使用" class="headerlink" title="安装使用"></a>安装使用</h2><p>KubeSphere 的安装步骤就省略了，直接按官网的走就可以。记得要给 k8s 配默认 StorageClass，生产环境建议直接上云存储或者 rook+ceph，我为了节省资源直接就用 NFS 了。</p><p>NFS 安装配置参考：<br><a href="https://linuxize.com/post/how-to-install-and-configure-an-nfs-server-on-ubuntu-20-04/" target="_blank" rel="noopener">How to Install and Configure an NFS Server on Ubuntu 20.04</a><br><a href="https://www.digitalocean.com/community/tutorials/how-to-set-up-an-nfs-mount-on-ubuntu-20-04/" target="_blank" rel="noopener">How To Set Up an NFS Mount on Ubuntu 20.04</a></p><p>KubeSphere 安装：<br><a href="https://kubesphere.io/zh/docs/installing-on-kubernetes/introduction/overview/" target="_blank" rel="noopener">在 Kubernetes 上安装 KubeSphere</a></p><p>安装完成后随便找个节点访问 30880 端口进入 dashboard。</p><p>登录之后进入 defult 集群，在配置多集群前只有这一个。默认展示当前集群资源用量。</p><p><img src="/images/kk1.jpg" alt="default Nodes"></p><p>界面可以切换中文显示。Projects 等同于 k8s 中的 namespace 概念，Projects 之上还有一层 workspace，用于多租户资源、计费隔离，当然也有用户权限管理。</p><p>Nodes 可以看到集群节点状态<br><img src="/images/kk2.jpg" alt="Nodes"></p><p>看下 Node 详情<br><img src="/images/kk3.jpg" alt="Node detail"></p><p>集群监控<br><img src="/images/kk4.jpg" alt="Cluster Status"></p><p>Workloads<br><img src="/images/kk8.jpg" alt="Workloads"></p><p>尝试在 Workloads 中创建一个 Deployment。<br><img src="/images/kk5.jpg" alt="Create Deployment"></p><p>选择镜像，设置资源限制<br><img src="/images/kk6.jpg" alt="Create Deployment"></p><p>端口暴露，环境变量，健康检查，容器安全设置等等<br><img src="/images/kk7.jpg" alt="Create Deployment"></p><p>滚动更新，调度规则等等，就不过多展示了，可以选择这种引导式配置，也可以直接用 yaml 部署非常方便。</p><p>Deployment 详情<br><img src="/images/kk9.jpg" alt="Deployment"></p><p>扩缩容、版本回滚都很方便。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;介绍&quot;&gt;&lt;a href=&quot;#介绍&quot; class=&quot;headerlink&quot; title=&quot;介绍&quot;&gt;&lt;/a&gt;介绍&lt;/h2&gt;&lt;p&gt;KubeSphere 是一个 k8s 集群管理平台，可以管理多云多集群，进行统一的应用分发和运维管理，避免云厂商绑定。提供了运维友好的操作界
+      
+    
+    </summary>
+    
+    
+      <category term="k8s" scheme="https://ibelieving.io/tags/k8s/"/>
+    
+  </entry>
   
   <entry>
     <title>Ubuntu 20.04 下部署 k8s v1.22.7 集群</title>
