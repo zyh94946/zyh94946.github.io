@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://ibelieving.io/2022/07/12/onedev/</loc>
+    
+    <lastmod>2022-07-12T14:39:36.844Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://ibelieving.io/2022/07/05/apache_apisix_ingress/</loc>
     
     <lastmod>2022-07-05T02:28:09.696Z</lastmod>
